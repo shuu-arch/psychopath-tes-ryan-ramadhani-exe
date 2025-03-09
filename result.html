@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>result</title>
+    <title>Hasil Tes Psikopat</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,36 +16,41 @@
         <a href="index.html"><button>Kembali</button></a>
     </div>
 
-    <script src="script.js">
-      
+    <script>
+        // Ambil data dari URL
         const params = new URLSearchParams(window.location.search);
         const nama = params.get("nama");
-        const persen = params.get("persen");
+        const persen = parseInt(params.get("persen")); // Perbaikan: Konversi ke angka
 
         let status = "";
         let gambar = "";
 
-        if (persen <= 30) {
-            status = "Normies 😂";
-            gambar = "img/normal.png";
-        } else if (persen <= 50) {
+        // Array gambar untuk kategori tertentu
+        const gambarUnder30 = ["img/normal.png", "img/normal2.png"];
+        const gambarUnder70 = ["img/still-normal.png", "img/still-normal2.png"];
+        const gambarUnder90 = ["img/gg.png", "img/gg2.png"];
+
+        if (persen <= 10) {
+            status = "Normal 100% 😊";
+            gambar = gambarUnder30[Math.floor(Math.random() * gambarUnder30.length)];
+        } else if (persen <= 40) {
             status = "Aman normal inimah 😎";
-            gambar = "img/still-normal.png";
+            gambar = gambarUnder30[Math.floor(Math.random() * gambarUnder30.length)];
         } else if (persen <= 70) {
             status = "Mulai terlihat tanda tanda bahwa kamu menjadi psikopat 😈";
-            gambar = "img/gg.png";
+            gambar = gambarUnder70[Math.floor(Math.random() * gambarUnder70.length)];
         } else if (persen <= 90) {
             status = "Psikopat asli 😈";
-            gambar = "img/psikopat.png";
+            gambar = gambarUnder90[Math.floor(Math.random() * gambarUnder90.length)];
         } else {
             status = "Raja Iblis 😈🔥";
-            gambar = "img/maou-sama.png";
+            gambar = "img/maou-sama.png"; // Tetap 1 gambar
         }
 
-        document.getElementById("result-text").innerHTML = `${nama},  <strong>${persen}%</strong><br>${status}`;
+        // Tampilkan hasil
+        document.getElementById("result-text").innerHTML = `${nama}, tingkat psikopatmu adalah <strong>${persen}%</strong><br>${status}`;
         document.getElementById("result-image").src = gambar;
-        
- <script src="script.js"></script>
+    </script>
 
 </body>
 </html>
