@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hasil Tes Psikopat</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -13,6 +14,15 @@
         <p id="result-text"></p>
         <img id="result-image" src="" alt="Hasil Psikopat">
         <br>
+        
+        <div class="share-buttons">
+            <a id="share-wa" class="share-btn"><i class="fab fa-whatsapp"></i></a>
+            <a id="share-fb" class="share-btn"><i class="fab fa-facebook"></i></a>
+            <a id="share-tw" class="share-btn"><i class="fab fa-twitter"></i></a>
+            <a id="share-tg" class="share-btn"><i class="fab fa-telegram"></i></a>
+        </div>
+
+        <br>
         <a href="index.html"><button>Kembali</button></a>
     </div>
 
@@ -20,12 +30,11 @@
         // Ambil data dari URL
         const params = new URLSearchParams(window.location.search);
         const nama = params.get("nama");
-        const persen = parseInt(params.get("persen")); // Perbaikan: Konversi ke angka
+        const persen = parseInt(params.get("persen"));
 
         let status = "";
         let gambar = "";
 
-        // Array gambar untuk kategori tertentu
         const gambarUnder30 = ["img/normal.png", "img/normal2.png"];
         const gambarUnder70 = ["img/still-normal.png", "img/still-normal2.png"];
         const gambarUnder90 = ["img/gg.png", "img/gg2.png"];
@@ -44,13 +53,40 @@
             gambar = gambarUnder90[Math.floor(Math.random() * gambarUnder90.length)];
         } else {
             status = "Raja Iblis 😈🔥";
-            gambar = "img/maou-sama.png"; // Tetap 1 gambar
+            gambar = "img/maou-sama.png";
         }
 
-        // Tampilkan hasil
-        document.getElementById("result-text").innerHTML = `${nama}, tingkat psikopatmu adalah <strong>${persen}%</strong><br>${status}`;
+        document.getElementById("result-text").innerHTML = `${nama}, Hasilnya adalah <strong>${persen}%</strong><br>${status}`;
         document.getElementById("result-image").src = gambar;
+
+        // URL untuk dibagikan
+        const currentUrl = window.location.href;
+        const shareText = encodeURIComponent(`${nama} GW dapet hasil ${persen}% Kalo lu berapa bang 😈`);
+        
+        document.getElementById("share-wa").href = `https://wa.me/?text=${shareText} ${currentUrl}`;
+        document.getElementById("share-fb").href = `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`;
+        document.getElementById("share-tw").href = `https://twitter.com/intent/tweet?text=${shareText}&url=${currentUrl}`;
+        document.getElementById("share-tg").href = `https://t.me/share/url?url=${currentUrl}&text=${shareText}`;
     </script>
+
+    <style>
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .share-btn {
+            font-size: 24px;
+            color: white;
+            background-color: grey;
+            padding: 10px;
+            border-radius: 50%;
+            text-decoration: none;
+        }
+        .share-btn:hover {
+            opacity: 0.8;
+        }
+    </style>
 
 </body>
 </html>
