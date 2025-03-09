@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>result</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Hasil Tes Psikopat</h1>
+        <p id="result-text"></p>
+        <img id="result-image" src="" alt="Hasil Psikopat">
+        <br>
+        <a href="index.html"><button>Kembali</button></a>
+    </div>
+
+    <script src="script.js">
+      
+        const params = new URLSearchParams(window.location.search);
+        const nama = params.get("nama");
+        const persen = params.get("persen");
+
+        let status = "";
+        let gambar = "";
+
+        if (persen <= 30) {
+            status = "Normies 😂";
+            gambar = "img/normal.png";
+        } else if (persen <= 50) {
+            status = "Aman normal inimah 😎";
+            gambar = "img/still-normal.png";
+        } else if (persen <= 70) {
+            status = "Mulai terlihat tanda tanda bahwa kamu menjadi psikopat 😈";
+            gambar = "img/gg.png";
+        } else if (persen <= 90) {
+            status = "Psikopat asli 😈";
+            gambar = "img/psikopat.png";
+        } else {
+            status = "Raja Iblis 😈🔥";
+            gambar = "img/maou-sama.png";
+        }
+
+        document.getElementById("result-text").innerHTML = `${nama},  <strong>${persen}%</strong><br>${status}`;
+        document.getElementById("result-image").src = gambar;
+        
+ <script src="script.js"></script>
+
+</body>
+</html>
